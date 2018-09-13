@@ -8,12 +8,10 @@ namespace DhHomework
         /// <summary>
         /// Moves all items less than the threshold to the start of the array. Otherwise does not change the order
         /// </summary>
-        /// <param name="items"></param>
-        /// <param name="threshold"></param>
         /// <returns>Returns the count of items less than the threshold</returns>
         public static int MoveItemsLessThanThresholdToStart(int[] items, int threshold)
         {
-            // I'll be allocating two temp buffers to do the sort.
+            // I'll be allocating a temp buffer to do the sort.
             // Though this can be done with no allocations by:
             // 1) Iterating each item
             // 2) Where the item is less than the threshold, take a copy of the item
@@ -27,7 +25,7 @@ namespace DhHomework
             // There might be a way to do this cheaply without using temp buffers, I didn't think about the problem too hard
 
             var itemValuesLessThanThreshold = new List<int>();
-            var itemIndexesLessThanThreshold = new List<int>();
+            var lastItemIndexLessThanThreshold = 0;
 
             // Iterate the items and record all indexes that are less than the threshold
             for (var i = 0; i < items.Length; i++)
@@ -36,16 +34,14 @@ namespace DhHomework
 
                 if (item >= threshold)
                     continue;
-
-                itemIndexesLessThanThreshold.Add(i);
+                
                 itemValuesLessThanThreshold.Add(item);
+                lastItemIndexLessThanThreshold = i;
             }
 
             // If none of the items need sorting
-            if (itemIndexesLessThanThreshold.Count == 0)
+            if (itemValuesLessThanThreshold.Count == 0)
                 return 0;
-
-            var lastItemIndexLessThanThreshold = itemIndexesLessThanThreshold[itemIndexesLessThanThreshold.Count - 1];
 
             int readIndex = lastItemIndexLessThanThreshold;
             int writeIndex = lastItemIndexLessThanThreshold;
@@ -81,7 +77,7 @@ namespace DhHomework
                 items[i] = itemValuesLessThanThreshold[i];
             }
 
-            return itemIndexesLessThanThreshold.Count;
+            return itemValuesLessThanThreshold.Count;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace DhHomework.Tests
 
             var count = ArraySort.MoveItemsLessThanThresholdToStart(items, threshold);
 
-            IsArrayContentEqual(items, new[] { 3, 2, 3, 6, 4, 5, 8 });
-            Assert.AreEqual(count, 3);
+            IsArrayContentEqual(new[] { 3, 2, 3, 6, 4, 5, 8 }, items);
+            Assert.AreEqual(3, count);
         }
 
         [TestMethod]
@@ -25,8 +25,8 @@ namespace DhHomework.Tests
 
             var count = ArraySort.MoveItemsLessThanThresholdToStart(items, threshold);
 
-            IsArrayContentEqual(items, new[] { 3, 2, 3, 3, 1, 2, 3, 6, 4, 5, 8 });
-            Assert.AreEqual(count, 7);
+            IsArrayContentEqual(new[] { 3, 2, 3, 3, 1, 2, 3, 6, 4, 5, 8 }, items);
+            Assert.AreEqual(7, count);
         }
 
         [TestMethod]
@@ -37,8 +37,8 @@ namespace DhHomework.Tests
 
             var count = ArraySort.MoveItemsLessThanThresholdToStart(items, threshold);
 
-            IsArrayContentEqual(items, new int[] { });
-            Assert.AreEqual(count, 0);
+            IsArrayContentEqual(new int[] { }, items);
+            Assert.AreEqual(0, count);
         }
 
         [TestMethod]
@@ -49,8 +49,8 @@ namespace DhHomework.Tests
 
             var count = ArraySort.MoveItemsLessThanThresholdToStart(items, threshold);
 
-            IsArrayContentEqual(items, new[] { 6, 4, 5, 8 });
-            Assert.AreEqual(count, 0);
+            IsArrayContentEqual(new[] { 6, 4, 5, 8 },items);
+            Assert.AreEqual(0,count);
         }
 
         [TestMethod]
@@ -61,8 +61,8 @@ namespace DhHomework.Tests
 
             var count = ArraySort.MoveItemsLessThanThresholdToStart(items, threshold);
 
-            IsArrayContentEqual(items, new[] { 3, 1, 2, 3 });
-            Assert.AreEqual(count, 4);
+            IsArrayContentEqual(new[] { 3, 1, 2, 3 },items);
+            Assert.AreEqual(4,count);
         }
 
         private static void IsArrayContentEqual(int[] a, int[] b)
