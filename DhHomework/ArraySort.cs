@@ -41,24 +41,47 @@ namespace DhHomework
                 itemValuesLessThanThreshold.Add(item);
             }
 
+            // If none of the items need sorting
             if (itemIndexesLessThanThreshold.Count == 0)
-                return itemIndexesLessThanThreshold.Count;
+                return 0;
+
+            var lastItemIndexLessThanThreshold = itemIndexesLessThanThreshold[itemIndexesLessThanThreshold.Count - 1];
+
+            int readIndex = lastItemIndexLessThanThreshold;
+            int writeIndex = lastItemIndexLessThanThreshold;
+
+            // When only one item needs to be reordered, and it's already where it needs to be at the start
+            //if (writeIndex < 0)
+            //    return lastItemIndexLessThanThreshold;
 
             // In one batch, sort the array by shifting elements. Loop backwards
             // We can skip over items at the end up until the last item thats less than the threshold
-            
-            var lastItemIndexLessThanThreshold = itemIndexesLessThanThreshold[itemIndexesLessThanThreshold.Count - 1];
-            int shiftSize = 0;
-            // Number of positions to move each item, it increments each time we encounter an item less than the threshold
-            for (var i = lastItemIndexLessThanThreshold; i > 0; i--)
+            for (; writeIndex >= 0;)
             {
-                if(items[i] < threshold)
+                // Iterate backwards until we find an item we can use to overwrite
+                for (; readIndex >= 0;)
                 {
-                    shiftSize++;
+                    if (items[readIndex] < threshold)
+                    {
+                        readIndex--;
+                        continue;
+                    }
+
+                    items[writeIndex] = items[readIndex];
+                    break;
                 }
 
-                items[i] = items[i - shiftSize];
+                readIndex--;
+                writeIndex--;
             }
+
+            // Now overwrite the start of the array with items less than the threshold
+            for (var i = 0; i < itemValuesLessThanThreshold.Count; i++)
+            {
+                items[i] = itemValuesLessThanThreshold[i];
+            }
+
+            return itemIndexesLessThanThreshold.Count;
         }
     }
 }
