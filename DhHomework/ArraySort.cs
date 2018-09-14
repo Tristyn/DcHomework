@@ -45,11 +45,7 @@ namespace DhHomework
 
             int readIndex = lastItemIndexLessThanThreshold;
             int writeIndex = lastItemIndexLessThanThreshold;
-
-            // When only one item needs to be reordered, and it's already where it needs to be at the start
-            //if (writeIndex < 0)
-            //    return lastItemIndexLessThanThreshold;
-
+            
             // In one batch, sort the array by shifting elements. Loop backwards
             // We can skip over items at the end up until the last item thats less than the threshold
             for (; writeIndex >= 0;)
